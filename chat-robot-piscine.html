@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
@@ -23,7 +23,9 @@
     place-items:center;
   }
   .module{
-    width:min(760px,100%);
+    width:100%;
+    max-width: 800px;
+    margin: 20px auto;
     background:var(--card);
     border-radius:16px;
     box-shadow:0 14px 30px rgba(0,0,0,0.14);
@@ -98,17 +100,24 @@
 
   .hidden{display:none}
 
-  .hint{
-    margin-top:10px;
-    font-size:12px;
-    color:var(--muted);
-    text-align:right;
+  .hover-overlay{
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 14px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--pool);
+    border: 2px dashed var(--pool);
+    margin: 20px auto;
+    cursor: default;
   }
 </style>
 </head>
 <body>
   <div class="module" id="module">
-    <div class="chat">
+    <div class="hover-overlay" id="hoverOverlay">👋 Passez la souris ici pour voir la discussion des robots !</div>
+    <div class="chat hidden" id="chatContainer">
       <div class="row" id="typingRow">
         <div class="avatar">RP</div>
         <div class="bubble typing" id="typingBubble">
@@ -129,8 +138,6 @@
         </div>
       </div>
     </div>
-
-    <div class="hint">Survole pour déclencher l’animation</div>
   </div>
 
 <script>
@@ -144,6 +151,9 @@
   function startOnce() {
     if (started) return;
     started = true;
+
+    document.getElementById("hoverOverlay").classList.add("hidden");
+    document.getElementById("chatContainer").classList.remove("hidden");
 
     typingBubble.style.display = "flex";
 

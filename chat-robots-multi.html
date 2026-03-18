@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
@@ -22,7 +22,8 @@
   }
   .module{
     width:100%;
-    margin:0;
+    max-width: 800px;
+    margin: 20px auto;
     background:var(--card);
     border-radius:16px;
     box-shadow:0 10px 20px rgba(0,0,0,0.12);
@@ -33,7 +34,8 @@
     border-radius:14px;
     padding:14px;
     background:#fafafa;
-    display:grid;
+    display:flex;
+    flex-direction:column;
     gap:12px;
   }
   .row{
@@ -72,8 +74,9 @@
 
   .name{
     display:block;
-    font-size:11px;
-    color:var(--muted);
+    font-size:13px;
+    font-weight:bold;
+    color:#222;
     margin-bottom:6px;
   }
   .name.right{ text-align:right; }
@@ -111,11 +114,45 @@
     font-size:12px;
     color:var(--muted);
   }
+  .replay-btn{
+    display: block;
+    margin: 20px auto 10px auto;
+    padding: 10px 20px;
+    background: var(--pool);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .replay-btn:hover{
+    background: #2581b8;
+    transform: scale(1.05);
+  }
+  .replay-btn.hidden{
+    display: none;
+  }
+  .hover-overlay{
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 14px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--pool);
+    border: 2px dashed var(--pool);
+    margin: 20px auto;
+    cursor: default;
+  }
 </style>
 </head>
 <body>
 <div class="module" id="module">
-  <div class="chat">
+  <div class="hover-overlay" id="hoverOverlay">👋 Passez la souris ici pour voir la discussion des robots !</div>
+  <div class="chat hidden" id="chatContainer">
 
     <!-- Typing + Message 1 (Tondeuse) -->
     <div class="row hidden" id="typing1">
@@ -129,10 +166,7 @@
       <div class="avatar lawn">RT</div>
       <div class="bubble left">
         <span class="name">Robot tondeuse (Fil périmétrique)</span>
-        J’déroule mon fil, j’trace la limite, c’est mon territoire,
-        Sans moi t’es perdu frérot, moi j’écris l’histoire !
-        Cadré, sécurisé, j’maîtrise mon périmètre,
-        Pendant qu’toi tu barbotes… moi j’contrôle mon terrain maître 😎
+        Moi, avec mon fil de délimitation, je suis sûr de ne jamais déborder chez le voisin et de suivre ma route à la lettre.
       </div>
     </div>
     <div class="row hidden" id="img1">
@@ -146,18 +180,15 @@
     <div class="row right hidden" id="typing2">
       <div class="avatar pool">RP</div>
       <div class="bubble right typing">
-        <span class="name right">Robot piscine (Hydraulique aspiration)</span>
+        <span class="name right">Aspirateur piscine (Portatif)</span>
         <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
       </div>
     </div>
     <div class="row right hidden" id="msg2">
       <div class="avatar pool">RP</div>
       <div class="bubble right">
-        <span class="name right">Robot piscine (Hydraulique aspiration)</span>
-        Branché au skimmer, j’aspire tout, zéro effort,
-        Les déchets disparaissent… moi j’fais pas semblant d’être fort !
-        J’avale la saleté, j’la recrache ailleurs 😏
-        Ton gazon va s’en souvenir… j’arrose avec honneur !
+        <span class="name right">Aspirateur piscine (Portatif)</span>
+        Je préfère la précision de mon manche sur batterie pour traquer personnellement chaque saleté dans le moindre recoin du bassin.
       </div>
     </div>
     <div class="row right hidden" id="img2">
@@ -179,10 +210,7 @@
       <div class="avatar lawn">RT</div>
       <div class="bubble left">
         <span class="name">Robot tondeuse (RTK GPS)</span>
-        Fil ? C’est du passé, j’suis passé en mode satellite 🚀
-        RTK précision centimètre, j’vise toujours right !
-        J’cartographie le terrain comme un drone en mission,
-        Toi t’es coincé dans l’eau… moi j’suis dans l’évolution !
+        Le fil c'est dépassé, je cible virtuellement mes zones de tonte par guidage satellite au centimètre près.
       </div>
     </div>
     <div class="row hidden" id="img3">
@@ -196,18 +224,15 @@
     <div class="row right hidden" id="typing4">
       <div class="avatar pool">RP</div>
       <div class="bubble right typing">
-        <span class="name right">Robot piscine (Hydraulique pression)</span>
+        <span class="name right">Robot piscine (Sans fil - Fond)</span>
         <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
       </div>
     </div>
     <div class="row right hidden" id="msg4">
       <div class="avatar pool">RP</div>
       <div class="bubble right">
-        <span class="name right">Robot piscine (Hydraulique pression)</span>
-        Silencieux, efficace, j’suis le requin sous pression,
-        Ma pompe intégrée fait le taf sans discussion !
-        Fonds, parois, pentes… j’nettoie tout sans stress,
-        Toi t’as besoin d’GPS… moi j’ai déjà la finesse 😏
+        <span class="name right">Robot piscine (Sans fil - Fond)</span>
+        Moi, je suis un vrai robot sur batterie, léger et profilé pour patrouiller sur tout le fond de la piscine en toute autonomie.
       </div>
     </div>
     <div class="row right hidden" id="img4">
@@ -229,10 +254,7 @@
       <div class="avatar lawn">RT</div>
       <div class="bubble left">
         <span class="name">Robot tondeuse (Caméra IA)</span>
-        Caméra 3D, j’analyse tout, j’suis dans le futur,
-        Obstacle ? Animal ? Humain ? J’évite, j’assure !
-        Mon app dessine la map, j’adapte mes attaques,
-        Toi t’es bloqué dans ton bassin… moi j’contrôle chaque impact 📱🔥
+        Vous êtes pourtant tous aveugles : ma caméra intelligente me permet d'identifier et d'éviter un hérisson en temps réel.
       </div>
     </div>
     <div class="row hidden" id="img5">
@@ -246,18 +268,15 @@
     <div class="row right hidden" id="typing6">
       <div class="avatar pool">RP</div>
       <div class="bubble right typing">
-        <span class="name right">Robot piscine (Sans fil)</span>
+        <span class="name right">Robot piscine (Sans fil - Multisurfaces)</span>
         <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
       </div>
     </div>
     <div class="row right hidden" id="msg6">
       <div class="avatar pool">RP</div>
       <div class="bubble right">
-        <span class="name right">Robot piscine (Sans fil)</span>
-        Sans fil dans l’eau, j’suis libre, autonome et dangereux,
-        GPS embarqué, j’avance même dans l’creux !
-        Je mange tous les résidus, j’suis un monstre affamé,
-        Pendant qu’toi tu réfléchis… moi j’ai déjà tout nettoyé 😎
+        <span class="name right">Robot piscine (Sans fil - Multisurfaces)</span>
+        Moi aussi je suis sur batterie, mais grâce à mes puissantes chenilles, je grimpe les parois et je nettoie activement même la ligne d'eau.
       </div>
     </div>
     <div class="row right hidden" id="img6">
@@ -279,10 +298,7 @@
       <div class="avatar lawn">RT</div>
       <div class="bubble left">
         <span class="name">Robot tondeuse (Lidar)</span>
-        Scan 360°, même la nuit j’suis actif 🌙
-        Laser en impulsion, j’suis ultra précis, ultra vif !
-        Carte 3D en temps réel, aucune zone m’échappe,
-        Toi t’es dans l’eau trouble… moi j’vois clair dans la map 🔥
+        Que ce soit en plein soleil ou dans la nuit noire, mon scanner Lidar modélise le terrain en 3D avec une précision absolue.
       </div>
     </div>
     <div class="row hidden" id="img7">
@@ -293,8 +309,8 @@
     </div>
 
   </div>
-
-  <div class="hint">Survole pour déclencher l’animation.</div>
+  <!-- We removed the old small hint text, replaced by the big overlay -->
+  <button class="replay-btn hidden" id="replayBtn" onclick="resetAndRestart()">Relancer l'animation</button>
 </div>
 
 <script>
@@ -327,6 +343,8 @@
   function startOnce(){
     if (started) return;
     started = true;
+    hide("hoverOverlay");
+    show("chatContainer");
 
     let t = 0;
     const typingTime = 1200;
@@ -348,9 +366,24 @@
       setTimeout(() => show(step.img), t);
       t += between;
     });
+
+    setTimeout(() => show("replayBtn"), t + 500);
   }
 
-  moduleEl.addEventListener("mouseenter", startOnce, { once:true });
+  function resetAndRestart() {
+    started = false;
+    hide("replayBtn");
+    steps.forEach(step => {
+      hide(step.typing);
+      hide(step.msg);
+      hide(step.img);
+    });
+    // Add the overlay back when manually reset
+    show("hoverOverlay");
+    hide("chatContainer");
+  }
+
+  moduleEl.addEventListener("mouseenter", startOnce);
 </script>
 </body>
 </html>

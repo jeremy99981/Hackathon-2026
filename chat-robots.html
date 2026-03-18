@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
@@ -25,7 +25,9 @@
     place-items:center;
   }
   .module{
-    width:min(760px,100%);
+    width:100%;
+    max-width: 800px;
+    margin: 20px auto;
     background:var(--card);
     border-radius:16px;
     box-shadow:0 14px 30px rgba(0,0,0,0.14);
@@ -84,9 +86,10 @@
     color:var(--muted);
     margin-bottom:6px;
   }
+  .name.right{ text-align:right; }
 
   .typing{
-    display:none;
+    display:flex;
     align-items:center;
     gap:6px;
   }
@@ -108,12 +111,38 @@
   }
 
   .hidden{display:none}
+
+  .hover-overlay{
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 14px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--pool);
+    border: 2px dashed var(--pool);
+    margin: 20px auto;
+    cursor: default;
+  }
 </style>
 </head>
 <body>
   <div class="module" id="module">
-    <div class="chat">
-      <div class="row">
+    <div class="hover-overlay" id="hoverOverlay">👋 Passez la souris ici pour voir la discussion des robots !</div>
+    <div class="chat hidden" id="chatContainer">
+      <div class="row hidden" id="typing1">
+        <div class="avatar lawn">RT</div>
+        <div class="bubble left typing">
+          <span class="name">Robot tondeuse</span>
+          <span class="dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="row hidden" id="msg1">
         <div class="avatar lawn">RT</div>
         <div class="bubble left">
           <span class="name">Robot tondeuse</span>
@@ -124,10 +153,10 @@
         </div>
       </div>
 
-      <div class="row" id="typingRow">
+      <div class="row right hidden" id="typing2">
         <div class="avatar pool">RP</div>
-        <div class="bubble left typing" id="typingBubble">
-          <span class="name">Robot piscine</span>
+        <div class="bubble right typing">
+          <span class="name right">Robot piscine</span>
           <span class="dots">
             <span class="dot"></span>
             <span class="dot"></span>
@@ -136,10 +165,10 @@
         </div>
       </div>
 
-      <div class="row right hidden" id="poolRow">
+      <div class="row right hidden" id="msg2">
         <div class="avatar pool">RP</div>
         <div class="bubble right">
-          <span class="name">Robot piscine</span>
+          <span class="name right">Robot piscine</span>
           Ça tombe bien, moi aussi je suis saisonnier.<br>
           Pendant le printemps et l’été.<br>
           Mais je fais le job à fond.<br>
@@ -152,22 +181,49 @@
 
 <script>
   const moduleEl = document.getElementById("module");
-  const typingRow = document.getElementById("typingRow");
-  const typingBubble = document.getElementById("typingBubble");
-  const poolRow = document.getElementById("poolRow");
+
+  const steps = [
+    { typing:"typing1", msg:"msg1" },
+    { typing:"typing2", msg:"msg2" }
+  ];
 
   let started = false;
+
+  function show(id){
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove("hidden");
+  }
+
+  function hide(id){
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add("hidden");
+  }
 
   function startOnce() {
     if (started) return;
     started = true;
 
-    typingBubble.style.display = "flex";
+    hide("hoverOverlay");
+    show("chatContainer");
 
-    setTimeout(() => {
-      typingRow.classList.add("hidden");
-      poolRow.classList.remove("hidden");
-    }, 2200);
+    let t = 0;
+    const typingTime = 1200;
+    const between = 700;
+
+    steps.forEach(step => {
+      // typing ON
+      setTimeout(() => show(step.typing), t);
+      t += typingTime;
+
+      // typing OFF + message ON
+      setTimeout(() => {
+        hide(step.typing);
+        show(step.msg);
+      }, t);
+      t += between;
+    });
   }
 
   moduleEl.addEventListener("mouseenter", startOnce, { once: true });
