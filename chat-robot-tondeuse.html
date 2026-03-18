@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chat Robot Tondeuse</title>
+<style>
+  :root{
+    --bg:#f6f2ea;
+    --card:#ffffff;
+    --text:#1f1f1f;
+    --muted:#6a6a6a;
+    --left:#f1f1f1;
+    --lawn:#2b8a3e;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    padding:24px;
+    font-family:"Trebuchet MS","Segoe UI",sans-serif;
+    background:radial-gradient(circle at 20% 10%, #e6f3ff, var(--bg));
+    display:grid;
+    place-items:center;
+  }
+  .module{
+    width:min(760px,100%);
+    background:var(--card);
+    border-radius:16px;
+    box-shadow:0 14px 30px rgba(0,0,0,0.14);
+    padding:16px 20px 20px 20px;
+  }
+  .chat{
+    border:2px solid #efefef;
+    border-radius:14px;
+    padding:10px 14px 14px 14px;
+    background:#fafafa;
+    display:grid;
+    gap:12px;
+  }
+  .row{
+    display:flex;
+    gap:10px;
+    align-items:flex-end;
+  }
+  .avatar{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    font-weight:700;
+    font-size:12px;
+    flex:0 0 auto;
+    background:var(--lawn);
+  }
+  .bubble{
+    max-width:70%;
+    padding:10px 12px;
+    border-radius:14px;
+    font-size:14px;
+    line-height:1.45;
+    background:var(--left);
+    border:1px solid #e3e3e3;
+    border-bottom-left-radius:6px;
+  }
+  .name{
+    display:block;
+    font-size:11px;
+    color:var(--muted);
+    margin-bottom:6px;
+  }
+
+  .typing{
+    display:none;
+    align-items:center;
+    gap:6px;
+  }
+  .dots{
+    display:inline-flex;
+    gap:4px;
+  }
+  .dot{
+    width:6px;height:6px;border-radius:50%;
+    background:#4a6ea9;
+    animation:bounce 1s infinite ease-in-out;
+    opacity:0.5;
+  }
+  .dot:nth-child(2){animation-delay:0.15s}
+  .dot:nth-child(3){animation-delay:0.3s}
+  @keyframes bounce{
+    0%,80%,100%{transform:translateY(0);opacity:0.4}
+    40%{transform:translateY(-4px);opacity:1}
+  }
+
+  .hidden{display:none}
+
+  .hint{
+    margin-top:10px;
+    font-size:12px;
+    color:var(--muted);
+  }
+</style>
+</head>
+<body>
+  <div class="module" id="module">
+    <div class="chat">
+      <div class="row" id="typingRow">
+        <div class="avatar">RT</div>
+        <div class="bubble typing" id="typingBubble">
+          <span class="name">Robot tondeuse</span>
+          <span class="dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="row hidden" id="msgRow">
+        <div class="avatar">RT</div>
+        <div class="bubble">
+          <span class="name">Robot tondeuse</span>
+          Moi je travaille sur terre, pas dans l'eau.
+        </div>
+      </div>
+    </div>
+
+    <div class="hint">Survole pour déclencher l’animation.</div>
+  </div>
+
+<script>
+  const moduleEl = document.getElementById("module");
+  const typingRow = document.getElementById("typingRow");
+  const typingBubble = document.getElementById("typingBubble");
+  const msgRow = document.getElementById("msgRow");
+
+  let started = false;
+
+  function startOnce() {
+    if (started) return;
+    started = true;
+
+    typingBubble.style.display = "flex";
+
+    setTimeout(() => {
+      typingRow.classList.add("hidden");
+      msgRow.classList.remove("hidden");
+    }, 2000);
+  }
+
+  moduleEl.addEventListener("mouseenter", startOnce, { once: true });
+</script>
+</body>
+</html>
