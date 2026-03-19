@@ -151,7 +151,7 @@
 </head>
 <body>
 <div class="module" id="module">
-  <div class="hover-overlay" id="hoverOverlay">👋 Passez la souris ici pour voir la discussion des robots !</div>
+  <div class="hover-overlay" id="hoverOverlay">👋 Passez la souris (ou touchez) ici pour voir la discussion des robots !</div>
   <div class="chat hidden" id="chatContainer">
 
     <!-- Typing + Message 1 (Tondeuse) -->
@@ -180,21 +180,21 @@
     <div class="row right hidden" id="typing2">
       <div class="avatar pool">RP</div>
       <div class="bubble right typing">
-        <span class="name right">Aspirateur piscine (Portatif)</span>
+        <span class="name right">Aspirateur piscine (Hydraulique à aspiration)</span>
         <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
       </div>
     </div>
     <div class="row right hidden" id="msg2">
       <div class="avatar pool">RP</div>
       <div class="bubble right">
-        <span class="name right">Aspirateur piscine (Portatif)</span>
-        Je préfère la précision de mon manche sur batterie pour traquer personnellement chaque saleté dans le moindre recoin du bassin.
+        <span class="name right">Aspirateur piscine (Hydraulique à aspiration)</span>
+        Moi, je me branche directement sur la filtration, ce qui me rend très abordable et presque sans entretien.
       </div>
     </div>
     <div class="row right hidden" id="img2">
       <div class="avatar pool">RP</div>
       <div class="bubble right img-bubble">
-        <img src="https://raw.githubusercontent.com/jeremy99981/Hackathon-2026/refs/heads/main/images/Robot_Piscine/Aspirateur_piscine_balais.png" alt="Robot piscine - image 1">
+        <img src="https://raw.githubusercontent.com/jeremy99981/Hackathon-2026/refs/heads/main/images/Robot_Piscine/Robot_Piscine_Aspiration.webp" alt="Robot piscine - image 1">
       </div>
     </div>
 
@@ -224,21 +224,21 @@
     <div class="row right hidden" id="typing4">
       <div class="avatar pool">RP</div>
       <div class="bubble right typing">
-        <span class="name right">Robot piscine (Sans fil - Fond)</span>
+        <span class="name right">Robot piscine (Hydraulique à pression)</span>
         <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
       </div>
     </div>
     <div class="row right hidden" id="msg4">
       <div class="avatar pool">RP</div>
       <div class="bubble right">
-        <span class="name right">Robot piscine (Sans fil - Fond)</span>
-        Moi, je suis un vrai robot sur batterie, léger et profilé pour patrouiller sur tout le fond de la piscine en toute autonomie.
+        <span class="name right">Robot piscine (Hydraulique à pression)</span>
+        Propulsé par un surpresseur, j'utilise mon propre bac pour ramasser les saletés sur de très grosses surfaces sans saturer le filtre.
       </div>
     </div>
     <div class="row right hidden" id="img4">
       <div class="avatar pool">RP</div>
       <div class="bubble right img-bubble">
-        <img src="https://raw.githubusercontent.com/jeremy99981/Hackathon-2026/refs/heads/main/images/Robot_Piscine/Robot_Piscine_Fond.png" alt="Robot piscine - image 2">
+        <img src="https://raw.githubusercontent.com/jeremy99981/Hackathon-2026/refs/heads/main/images/Robot_Piscine/Robot_Piscine_A_Aspiration.webp" alt="Robot piscine - image 2">
       </div>
     </div>
 
@@ -268,15 +268,15 @@
     <div class="row right hidden" id="typing6">
       <div class="avatar pool">RP</div>
       <div class="bubble right typing">
-        <span class="name right">Robot piscine (Sans fil - Multisurfaces)</span>
+        <span class="name right">Robot piscine (Sans fil)</span>
         <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
       </div>
     </div>
     <div class="row right hidden" id="msg6">
       <div class="avatar pool">RP</div>
       <div class="bubble right">
-        <span class="name right">Robot piscine (Sans fil - Multisurfaces)</span>
-        Moi aussi je suis sur batterie, mais grâce à mes puissantes chenilles, je grimpe les parois et je nettoie activement même la ligne d'eau.
+        <span class="name right">Robot piscine (Sans fil)</span>
+        Je suis 100% autonome sur batterie : je dévore tous les types de débris et vous pouvez même vous baigner pendant que je travaille !
       </div>
     </div>
     <div class="row right hidden" id="img6">
@@ -384,6 +384,8 @@
   }
 
   moduleEl.addEventListener("mouseenter", startOnce);
+  moduleEl.addEventListener("touchstart", startOnce, { passive: true });
+  moduleEl.addEventListener("click", startOnce);
 </script>
 </body>
 </html>
